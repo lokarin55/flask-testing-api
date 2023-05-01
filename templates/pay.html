@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <script>
-fetch('/link')
-  .then(response => response.json())
-  .then(data => {
-    if (data.shortUrl) {
-      const shortUrlString = data.shortUrl.toString();
-      window.location.href = shortUrlString;
-    } else {
-      alert("Error: " + data.error);
-    }
-  });
+    const params = new URLSearchParams(window.location.search);
+    const amount = params.get("amount");
+
+    fetch(`/link?amount=${amount}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.shortUrl) {
+          const shortUrlString = data.shortUrl.toString();
+          window.location.href = shortUrlString;
+        } else {
+          alert("Error: " + data.error);
+        }
+      });
   </script>
 </html>
